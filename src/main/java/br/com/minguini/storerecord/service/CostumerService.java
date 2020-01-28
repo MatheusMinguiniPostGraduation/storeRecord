@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CostumerService {
@@ -19,5 +20,9 @@ public class CostumerService {
 
     public List<Costumer> findAllUsers(){
         return repository.findAll();
+    }
+
+    public Optional<Costumer> findById(long costumerId) {
+        return repository.findById(costumerId);
     }
 }

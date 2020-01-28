@@ -12,9 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/costumers")
@@ -24,11 +23,25 @@ public class CustomerController {
     CostumerService service;
 
     @GetMapping
-    public List<CostumerDTO> findUsers(){
+    public List<CostumerDTO> findCostumers(String nome, String sobrenome){
 
         List<Costumer> costumers;
 
         return  CostumerDTO.convert(service.findAllUsers());
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{costumerId}")
+    public ResponseEntity<CostumerDTO> findById(@PathVariable final long costumerId){
+
+        Optional<Costumer> costumer = service.findById(costumerId);
+
+        if(costumer.isPresent()){
+            CostumerDTO costumerDTO = new CostumerDTO(costumer.get());
+            return ResponseEntity.ok(costumerDTO);
+        }
+
+        return ResponseEntity.notFound().build();
+
     }
 
     @PostMapping
