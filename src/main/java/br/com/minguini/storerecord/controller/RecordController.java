@@ -41,13 +41,14 @@ public class RecordController {
     @PostMapping
     public ResponseEntity<RecordDTO> insert(@RequestBody @Valid RecordForm form, UriComponentsBuilder uriBuilder) {
 
-        Long costumerId = form.getCostumerId();
-
         try{
-            service.verifyRecordAlreadyExists(costumerId);
+            Costumer costumer = form.convertFormIntoCostumer();
 
-            Record record = RecordFactory.getRecord(costumerId);
-            service.save(record);
+            service.verifyRecordAlreadyExists(costumer);
+
+            Record record = RecordFactory.getRecord(costumer);
+
+            service.save(record, costumer);
 
             URI uri = uriBuilder.path("/records/{id}").buildAndExpand(record.getId()).toUri();
 

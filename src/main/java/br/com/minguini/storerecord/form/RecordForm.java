@@ -1,19 +1,55 @@
 package br.com.minguini.storerecord.form;
 
 import br.com.minguini.storerecord.entity.Costumer;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@Validated
 public class RecordForm {
 
+    @NotEmpty
     @NotNull
-    private Long costumerId;
+    private String name;
 
-    public Long getCostumerId() {
-        return costumerId;
+    @NotEmpty
+    @NotNull
+    private String lastName;
+
+    private String extraInformation;
+
+    public String getName() {
+        return name;
     }
 
-    public void setCostumerId(Long costumerId) {
-        this.costumerId = costumerId;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getExtraInformation() {
+        return extraInformation;
+    }
+
+    public void setExtraInformation(String extraInformation) {
+        this.extraInformation = extraInformation;
+    }
+
+    public Costumer convertFormIntoCostumer() {
+        Costumer costumer = new Costumer();
+        costumer.setName(this.name);
+        costumer.setLastName(this.lastName);
+        costumer.setExtraInformation(this.extraInformation);
+
+        return costumer;
+    }
+
 }
