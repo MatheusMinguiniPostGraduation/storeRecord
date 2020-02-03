@@ -1,28 +1,28 @@
-package br.com.minguini.storerecord.security;
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+//package br.com.minguini.storerecord.security;
+//
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.http.HttpMethod;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.builders.WebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+//
 ////Enabling Security by Spring Security features
-@EnableWebSecurity
-
+//@EnableWebSecurity
+//
 ////Telling Spring that it is a configuration class
-@Configuration
-public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login").permitAll();
-    }
-
-    //    //To configure the authentication configuration (Login, password)
+//@Configuration
+//public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
+//
+//    @Override
+//    public void configure(HttpSecurity http) throws Exception {
+//
+//        http.authorizeRequests()
+//                .antMatchers(HttpMethod.POST, "/login").permitAll();
+//    }
+//
+//    //To configure the authentication configuration (Login, password)
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //
@@ -43,4 +43,4 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 //    public void configure(WebSecurity web) throws Exception {
 //
 //    }
-}
+//}

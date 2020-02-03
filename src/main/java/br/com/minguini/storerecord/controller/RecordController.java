@@ -40,7 +40,6 @@ public class RecordController {
 
     @PostMapping
     public ResponseEntity<RecordDTO> insert(@RequestBody @Valid RecordForm form, UriComponentsBuilder uriBuilder) {
-
         try{
             Costumer costumer = form.convertFormIntoCostumer();
 

@@ -1,9 +1,6 @@
 package br.com.minguini.storerecord.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -11,6 +8,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne (cascade = {CascadeType.PERSIST})
+    private Sale sale;
 
     private String description;
 
