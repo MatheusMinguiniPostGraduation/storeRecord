@@ -56,4 +56,5 @@ public class RecordController {
            return ResponseEntity.status(HttpStatus.CONFLICT).body(new RecordDTO(exception.getRecord()));
         }
     }
+
 }
