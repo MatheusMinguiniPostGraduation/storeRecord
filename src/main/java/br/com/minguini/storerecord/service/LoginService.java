@@ -17,12 +17,6 @@ public class LoginService implements UserDetailsService {
     @Autowired
     UserRepository repository;
 
-    public Boolean isDataRight(String login, String password){
-        List<User> users = repository.findByLoginAndPassword(login, password);
-
-        return !users.isEmpty();
-    }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user =  repository.findByLogin(username);

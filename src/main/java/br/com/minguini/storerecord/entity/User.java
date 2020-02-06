@@ -52,6 +52,14 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public List<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List<Profile> profiles) {
+        this.profiles = profiles;
+    }
+
 
     //Methods for Spring Security to work
 

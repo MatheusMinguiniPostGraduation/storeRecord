@@ -2,6 +2,8 @@ package br.com.minguini.storerecord.service;
 
 
 import br.com.minguini.storerecord.entity.User;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,11 +15,12 @@ import java.util.Date;
 @Service
 public class AuthenticationService {
 
-    @Value("${forum.jwt.expiration}")
+    @Value("${store.jwt.expiration}")
     private String expiration;
 
-    @Value("${forum.jwt.secret}")
+    @Value("${store.jwt.secret}")
     private String secret;
+
 
     public String generateToken(Authentication authentication){
 
@@ -32,5 +35,24 @@ public class AuthenticationService {
                 .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS256, this.secret)
                 .compact();
+    }
+
+
+    public Boolean isTokenValid(String token){
+
+        try{
+            Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+        }catch (Exception e){
+            return Boolean.FALSE;
+        }
+
+        return Boolean.TRUE;
+    }
+
+    public Long getUserId(String token){
+
+        Claims tokenDetails = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+        return Long.parseLong(tokenDetails.getSubject());
+
     }
 }

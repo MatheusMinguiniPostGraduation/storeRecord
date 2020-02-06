@@ -1,5 +1,7 @@
 package br.com.minguini.storerecord.security;
 
+import br.com.minguini.storerecord.repository.UserRepository;
+import br.com.minguini.storerecord.service.AuthenticationService;
 import br.com.minguini.storerecord.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,9 +22,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     @Override
     @Bean
@@ -34,10 +41,12 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(loginService).passwordEncoder(new BCryptPasswordEncoder());
-
-        //TODO : Encrypt Password afterwards
-        //.passwordEncoder(new BCryptPasswordEncoder());
     }
+
+//    public static void main(String[] args) {
+//        String password = new BCryptPasswordEncoder().encode("teste");
+//        System.out.println(password);
+//    }
 
     //To configure the authorization (Which profile can access each URI)
     @Override
@@ -54,7 +63,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 //Adding the filter that will be executed before every request
-                .addFilterBefore(new AutheticationInterceptor(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new AuthenticationInterceptor(authenticationService, userRepository), UsernamePasswordAuthenticationFilter.class);
     }
 
 
