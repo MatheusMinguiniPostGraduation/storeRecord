@@ -1,5 +1,6 @@
 package br.com.minguini.storerecord.controller;
 
+import br.com.minguini.storerecord.dto.TokenDto;
 import br.com.minguini.storerecord.form.LoginForm;
 import br.com.minguini.storerecord.service.AuthenticationService;
 import br.com.minguini.storerecord.service.LoginService;
@@ -9,7 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +29,12 @@ public class LoginController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    //This class does not is pre-set to make independency injection, therefore, we have to configure it manually
+    //This class does not is pre-set to make Dependency Injection, therefore, we have to configure it manually. It was configured in SecurityConfigurations.authenticationManager()
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @PostMapping
-    public ResponseEntity<String> login(@RequestBody @Valid LoginForm form, UriComponentsBuilder uriBuilder){
-
+    public ResponseEntity<TokenDto> login(@RequestBody @Valid LoginForm form, UriComponentsBuilder uriBuilder){
         String login = form.getLogin();
         String password = form.getPassword();
 
@@ -46,11 +46,17 @@ public class LoginController {
 
             String token = authenticationService.generateToken(authentication);
 
-            return ResponseEntity.badRequest().build();
+            // The HTTP protocol has authentication specification types, one of them is the BEARER, which means I am sending a token along with the request
 
+            // The Token will be returned to the CLIENT, the client will have to inform this token o the header in every request made
+            // The CLIENT will also need to inform the authentication in the Header type which in this case is Bearer
+            return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         }catch (AuthenticationException e){
             return ResponseEntity.badRequest().build();
         }
-    }
 
+
+
+
+    }
 }

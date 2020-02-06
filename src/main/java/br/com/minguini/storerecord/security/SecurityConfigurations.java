@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 //Enabling Security by Spring Security features
 @EnableWebSecurity
@@ -32,7 +33,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     //To configure the authentication configuration (Login, password)
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(loginService);
+        auth.userDetailsService(loginService).passwordEncoder(new BCryptPasswordEncoder());
 
         //TODO : Encrypt Password afterwards
         //.passwordEncoder(new BCryptPasswordEncoder());
@@ -50,7 +51,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 // There is no necessity to handle that attack. That is why CSRF is disabled
                 .and().csrf().disable()
                 //Telling Spring Security that the authentiction will no longer use session, it will use token otherwise
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                //Adding the filter that will be executed before every request
+                .addFilterBefore(new AutheticationInterceptor(), UsernamePasswordAuthenticationFilter.class);
     }
 
 
