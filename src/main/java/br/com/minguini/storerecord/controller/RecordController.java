@@ -16,6 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -36,6 +38,27 @@ public class RecordController {
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public List<RecordDTO> findRecords(String name){
+
+        List<RecordDTO> response = new ArrayList<>();
+
+        List<Record> records;
+
+        if(name != null){
+            records = service.findByCostumerNameOrLastName(name);
+        }else{
+            records = service.findAll();
+        }
+
+        records.forEach( (record) -> {
+            RecordDTO dto = new RecordDTO(record);
+            response.add(dto);
+        });
+
+        return response;
     }
 
     @PostMapping

@@ -12,6 +12,9 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
     @Query("SELECT record FROM Record record JOIN record.costumer costumer WHERE costumer.name LIKE :name AND costumer.lastName LIKE :lastName")
     List<Record> findByCostumerNameAndLastName(@Param("name") String name, @Param("lastName") String last_name);
 
+    @Query("SELECT record FROM Record record JOIN record.costumer costumer WHERE costumer.name LIKE %:name% OR costumer.lastName LIKE %:name%")
+    List<Record> findByCostumerNameOrLastName(@Param("name") String name);
+
     List<Record> findByCostumerId(Long costumerId);
 
 }

@@ -23,7 +23,7 @@ public class CustomerController {
 
         List<Costumer> costumers;
 
-        return  CostumerDTO.convert(service.findAllUsers());
+        return  CostumerDTO.convert(service.findAll());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{costumerId}")
@@ -39,15 +39,4 @@ public class CustomerController {
         return ResponseEntity.notFound().build();
     }
 
-//    @PostMapping
-//    public ResponseEntity<CostumerDTO> insert(@RequestBody @Valid CostumerForm form, UriComponentsBuilder uriBuilder){
-//
-//        Costumer costumer = form.convert();
-//
-//        service.save(costumer);
-//
-//        URI uri = uriBuilder.path("/costumer/{id}").buildAndExpand(costumer.getId()).toUri();
-//
-//        return ResponseEntity.created(uri).body(new CostumerDTO(costumer));
-//    }
 }

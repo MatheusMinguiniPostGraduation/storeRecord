@@ -28,9 +28,18 @@ public class RecordService {
         recordRepository.save(record);
     }
 
+    public List<Record> findAll(){
+        return recordRepository.findAll();
+    }
+
     public Optional<Record> findById(long recordId) {
         return recordRepository.findById(recordId);
     }
+
+    public List<Record> findByCostumerNameOrLastName (String name){
+       return recordRepository.findByCostumerNameOrLastName(name);
+    }
+
 
     public void verifyRecordAlreadyExists(Costumer costumer) throws RecordAlreadyExistsException{
         List<Record> records = recordRepository.findByCostumerNameAndLastName(costumer.getName(), costumer.getLastName());

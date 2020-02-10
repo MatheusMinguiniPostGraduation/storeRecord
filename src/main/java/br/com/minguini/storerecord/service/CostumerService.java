@@ -18,7 +18,7 @@ public class CostumerService {
         repository.save(costumer);
     }
 
-    public List<Costumer> findAllUsers(){
+    public List<Costumer> findAll(){
         return repository.findAll();
     }
 
