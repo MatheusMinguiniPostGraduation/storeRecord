@@ -65,8 +65,4 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 //Adding the filter that will be executed before every request
                 .addFilterBefore(new AuthenticationInterceptor(authenticationService, userRepository), UsernamePasswordAuthenticationFilter.class);
     }
-
-
-
-
 }

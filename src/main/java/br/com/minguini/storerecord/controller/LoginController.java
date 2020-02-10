@@ -52,11 +52,7 @@ public class LoginController {
             // The CLIENT will also need to inform the authentication in the Header type which in this case is Bearer
             return ResponseEntity.ok(new TokenDto(token, "Bearer"));
         }catch (AuthenticationException e){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(401).build();
         }
-
-
-
-
     }
 }
