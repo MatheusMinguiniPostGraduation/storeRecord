@@ -3,53 +3,32 @@ package br.com.minguini.storerecord.form;
 import br.com.minguini.storerecord.entity.Costumer;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Validated
 public class RecordForm {
 
-    @NotEmpty
     @NotNull
-    private String name;
+    @Valid
+    private CostumerForm costumer;
 
-    @NotEmpty
-    @NotNull
-    private String lastName;
-
-    private String extraInformation;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getExtraInformation() {
-        return extraInformation;
-    }
-
-    public void setExtraInformation(String extraInformation) {
-        this.extraInformation = extraInformation;
-    }
-
-    public Costumer convertFormIntoCostumer() {
-        Costumer costumer = new Costumer();
-        costumer.setName(this.name);
-        costumer.setLastName(this.lastName);
-        costumer.setExtraInformation(this.extraInformation);
-
+    public CostumerForm getCostumer() {
         return costumer;
     }
 
+    public void setCostumer(CostumerForm costumer) {
+        this.costumer = costumer;
+    }
+
+    public Costumer convertFormIntoCostumer(){
+        Costumer convertedCostumer = new Costumer();
+
+        convertedCostumer.setId(this.costumer.getId());
+        convertedCostumer.setName(this.costumer.getName());
+        convertedCostumer.setLastName(this.costumer.getLastName());
+        convertedCostumer.setExtraInformation(this.costumer.getExtraInformation());
+
+        return convertedCostumer;
+    }
 }
