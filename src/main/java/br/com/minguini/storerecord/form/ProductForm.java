@@ -1,23 +1,26 @@
-package br.com.minguini.storerecord.entity;
+package br.com.minguini.storerecord.form;
 
-import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
-@Entity
-public class Product {
+@Valid
+public class ProductForm {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne (cascade = {CascadeType.PERSIST})
-    private Sale sale;
-
+    @NotEmpty
+    @NotNull
     private String description;
 
+    @Positive
     private Double unit_value;
 
+    @Positive
     private Double total_value;
 
+    @Positive
     private Integer amount;
 
     public Long getId() {
@@ -34,14 +37,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
     }
 
     public Double getUnit_value() {

@@ -23,14 +23,8 @@ public class SaleFactory {
         sale.setUser(user);
         sale.setRecord(record);
         sale.setDate(LocalDateTime.now());
-        sale.setProducts(saleForm.getProducts());
-
-        Double total = 0.0;
-
-        for (Product product : sale.getProducts()){
-            total = total + product.getValue();
-        }
-        sale.setTotal(total);
+        sale.setProducts(saleForm.getProductEntities());
+        sale.setTotal();
 
         return sale;
     }

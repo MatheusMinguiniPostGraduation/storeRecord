@@ -1,6 +1,7 @@
 package br.com.minguini.storerecord.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -60,5 +61,7 @@ public class Sale {
 
     public Double getTotal() { return total; }
 
-    public void setTotal(Double total) { this.total = total; }
+    public void setTotal() {
+        this.total = this.products.stream().mapToDouble(Product::getTotal_value).sum();
+    }
 }

@@ -2,14 +2,18 @@ package br.com.minguini.storerecord.form;
 
 import br.com.minguini.storerecord.entity.Product;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaleForm {
 
     private Long recordId;
     private Long userId;
+    private Double total;
 
-    private List<Product> products;
+    @Valid
+    private List<ProductForm> products;
 
     public Long getRecordId() {
         return recordId;
@@ -27,11 +31,36 @@ public class SaleForm {
         this.userId = userId;
     }
 
-    public List<Product> getProducts() {
+    public List<ProductForm> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<ProductForm> products) {
         this.products = products;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public List<Product> getProductEntities(){
+
+        List<Product> productEntities = new ArrayList<Product>();
+
+        this.products.forEach((productForm) -> {
+            Product product = new Product();
+            product.setDescription(productForm.getDescription());
+            product.setUnit_value(productForm.getUnit_value());
+            product.setTotal_value(productForm.getTotal_value());
+            product.setAmount(productForm.getAmount());
+
+            productEntities.add(product);
+        });
+
+        return productEntities;
     }
 }
