@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @Validated
 public class RecordForm {
 
+    private Long id;
+
     @NotNull
     @Valid
     private CostumerForm costumer;
@@ -19,6 +21,14 @@ public class RecordForm {
 
     public void setCostumer(CostumerForm costumer) {
         this.costumer = costumer;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Costumer convertFormIntoCostumer(){

@@ -3,6 +3,7 @@ package br.com.minguini.storerecord.service;
 import br.com.minguini.storerecord.entity.Costumer;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.exception.RecordAlreadyExistsException;
+import br.com.minguini.storerecord.form.RecordForm;
 import br.com.minguini.storerecord.repository.CostumerRepository;
 import br.com.minguini.storerecord.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,18 @@ public class RecordService {
         if(records.size() > 0){
           throw new RecordAlreadyExistsException(records.get(0));
         }
+    }
+
+    public Record update(Long id, RecordForm form) {
+        Record record = recordRepository.getOne(id);
+
+        Costumer costumer = record.getCostumer();
+        costumer.setName(form.getCostumer().getName());
+        costumer.setLastName(form.getCostumer().getLastName());
+        costumer.setExtraInformation(form.getCostumer().getExtraInformation());
+
+        record.setCostumer(costumer);
+
+        return record;
     }
 }

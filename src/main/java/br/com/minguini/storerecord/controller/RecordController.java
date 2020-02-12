@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
@@ -80,4 +81,16 @@ public class RecordController {
         }
     }
 
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<RecordDTO> update(@PathVariable Long id, @RequestBody @Valid RecordForm form, UriComponentsBuilder uriBuilder) {
+
+        if(id == null){
+            return ResponseEntity.badRequest().build();
+        }
+
+        Record record = this.service.update(id, form);
+
+        return ResponseEntity.ok(new RecordDTO(record));
+    }
 }
