@@ -9,7 +9,7 @@ import java.util.List;
 public class SaleForm {
 
     private Long recordId;
-    private Long userId;
+
     private Double total;
 
     @Valid
@@ -21,14 +21,6 @@ public class SaleForm {
 
     public void setRecordId(Long recordId) {
         this.recordId = recordId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public List<ProductForm> getProducts() {

@@ -32,11 +32,10 @@ public class SaleController {
 
         Sale sale = SaleFactory.getSale(form, userId);
 
-        Sale salePersisted = new Sale();
-        salePersisted = service.save(sale);
+        Sale salePersisted = service.save(sale);
 
         URI uri = uriBuilder.path("/sales/{id}").buildAndExpand(sale.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(new SaleDTO(sale));
+        return ResponseEntity.created(uri).body(new SaleDTO(salePersisted));
     }
 }

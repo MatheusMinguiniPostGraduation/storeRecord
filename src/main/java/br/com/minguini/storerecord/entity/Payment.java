@@ -16,11 +16,15 @@ public class Payment {
     @ManyToOne
     private User user;
 
+    private Double interest;
+
     private Double value;
 
-    private LocalDateTime time;
+    private Double total;
 
-    private Boolean status;
+    private LocalDateTime date;
+
+    private Boolean cancelled;
 
     public Long getId() {
         return id;
@@ -46,6 +50,14 @@ public class Payment {
         this.user = user;
     }
 
+    public Double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Double interest) {
+        this.interest = interest;
+    }
+
     public Double getValue() {
         return value;
     }
@@ -54,19 +66,27 @@ public class Payment {
         this.value = value;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public Boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(Boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }
