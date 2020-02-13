@@ -6,12 +6,11 @@ import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.factory.SaleFactory;
 import br.com.minguini.storerecord.form.SaleForm;
 import br.com.minguini.storerecord.service.SaleService;
+import br.com.minguini.storerecord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -24,15 +23,21 @@ public class SaleController {
     @Autowired
     SaleService service;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping
-    public ResponseEntity<SaleDTO> save(@RequestBody @Valid SaleForm form, UriComponentsBuilder uriBuilder){
+    @Transactional
+    public ResponseEntity<SaleDTO> save(@RequestBody @Valid SaleForm form, UriComponentsBuilder uriBuilder,   @RequestHeader(value="Authorization") String authorizationHeader){
 
-            Sale sale = SaleFactory.getSale(form);
+        Long userId = userService.getUserIdAuthenticated(authorizationHeader);
 
-            service.save(sale);
+        Sale sale = SaleFactory.getSale(form, userId);
 
-            URI uri = uriBuilder.path("/sales/{id}").buildAndExpand(sale.getId()).toUri();
+        service.save(sale);
 
-            return ResponseEntity.created(uri).body(new SaleDTO());
+        URI uri = uriBuilder.path("/sales/{id}").buildAndExpand(sale.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new SaleDTO(sale));
     }
 }

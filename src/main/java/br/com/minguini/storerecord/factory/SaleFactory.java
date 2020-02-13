@@ -1,6 +1,5 @@
 package br.com.minguini.storerecord.factory;
 
-import br.com.minguini.storerecord.entity.Product;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.entity.User;
@@ -10,13 +9,13 @@ import java.time.LocalDateTime;
 
 public class SaleFactory {
 
-    public static Sale getSale(SaleForm saleForm){
+    public static Sale getSale(SaleForm saleForm, Long userId){
 
         Record record = new Record();
         record.setId(saleForm.getRecordId());
 
         User user = new User();
-        user.setId(saleForm.getUserId());
+        user.setId(userId);
 
         Sale sale = new Sale();
 
