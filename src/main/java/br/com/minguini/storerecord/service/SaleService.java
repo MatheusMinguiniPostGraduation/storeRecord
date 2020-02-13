@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 public class SaleService {
 
@@ -22,7 +20,7 @@ public class SaleService {
 
     @Transactional
     // Test if given a record ID that does not exist, the Sale will still be persisted. It cant be persisted with a recordId that is not yet saved
-    public void save(Sale sale){
+    public Sale save(Sale sale){
 
         Record record = recordRepository.getOne(sale.getRecord().getId());
 
@@ -32,6 +30,6 @@ public class SaleService {
             record.setTotal(value);
         }
 
-        saleRepository.save(sale);
+        return saleRepository.save(sale);
     }
 }

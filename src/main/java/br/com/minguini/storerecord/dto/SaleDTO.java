@@ -26,7 +26,7 @@ public class SaleDTO {
         this.id = sale.getId();
         this.date =  sale.getDate();
         //this.products = sale.getProducts();
-        //this.record = sale.getRecord();
+        this.record = sale.getRecord();
         this.total = sale.getTotal();
     }
 

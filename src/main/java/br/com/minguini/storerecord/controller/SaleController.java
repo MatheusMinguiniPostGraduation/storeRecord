@@ -9,7 +9,6 @@ import br.com.minguini.storerecord.service.SaleService;
 import br.com.minguini.storerecord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,14 +26,14 @@ public class SaleController {
     UserService userService;
 
     @PostMapping
-    @Transactional
     public ResponseEntity<SaleDTO> save(@RequestBody @Valid SaleForm form, UriComponentsBuilder uriBuilder,   @RequestHeader(value="Authorization") String authorizationHeader){
 
         Long userId = userService.getUserIdAuthenticated(authorizationHeader);
 
         Sale sale = SaleFactory.getSale(form, userId);
 
-        service.save(sale);
+        Sale salePersisted = new Sale();
+        salePersisted = service.save(sale);
 
         URI uri = uriBuilder.path("/sales/{id}").buildAndExpand(sale.getId()).toUri();
 
