@@ -1,19 +1,18 @@
 package br.com.minguini.storerecord.dto;
 
-import br.com.minguini.storerecord.entity.Costumer;
 import br.com.minguini.storerecord.entity.Record;
 
 public class RecordDTO {
 
     private Long id;
 
-    private Costumer costumer;
+    private CostumerDTO costumer;
 
     private Double total;
 
     public RecordDTO(Record record) {
        this.id = record.getId();
-       this.costumer = record.getCostumer();
+       this.costumer = new CostumerDTO(record.getCostumer());
        this.total = record.getTotal();
     }
 
@@ -25,11 +24,11 @@ public class RecordDTO {
         this.id = id;
     }
 
-    public Costumer getCostumer() {
+    public CostumerDTO getCostumer() {
         return costumer;
     }
 
-    public void setCostumer(Costumer costumer) {
+    public void setCostumer(CostumerDTO costumer) {
         this.costumer = costumer;
     }
 

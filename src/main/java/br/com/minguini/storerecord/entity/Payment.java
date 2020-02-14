@@ -1,7 +1,7 @@
 package br.com.minguini.storerecord.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Payment {
@@ -22,7 +22,7 @@ public class Payment {
 
     private Double total;
 
-    private LocalDateTime date;
+    private Date date;
 
     private Boolean cancelled;
 
@@ -74,11 +74,11 @@ public class Payment {
         this.total = total;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

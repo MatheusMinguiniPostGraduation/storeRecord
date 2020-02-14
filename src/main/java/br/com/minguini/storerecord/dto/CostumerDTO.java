@@ -7,12 +7,14 @@ import java.util.List;
 
 public class CostumerDTO {
     private Long id;
-    private String fullName;
+    private String name;
+    private String lastName;
     private String extraInformation;
 
     public CostumerDTO(Costumer costumer) {
         this.id = costumer.getId();
-        this.fullName = costumer.getName().concat(" " + costumer.getLastName());
+        this.name = costumer.getName();
+        this.lastName = costumer.getLastName();
         this.extraInformation = costumer.getExtraInformation();
     }
 
@@ -36,12 +38,20 @@ public class CostumerDTO {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getExtraInformation() {

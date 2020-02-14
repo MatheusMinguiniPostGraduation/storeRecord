@@ -1,9 +1,8 @@
 package br.com.minguini.storerecord.dto;
 
 import br.com.minguini.storerecord.entity.Payment;
-import br.com.minguini.storerecord.entity.Record;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class PaymentDTO {
 
@@ -11,9 +10,9 @@ public class PaymentDTO {
 
     private String userName;
 
-    private Record record;
+    private RecordDTO record;
 
-    private LocalDateTime date;
+    private Date date;
 
     private Double interest;
 
@@ -25,7 +24,7 @@ public class PaymentDTO {
 
     public PaymentDTO(Payment payment){
         this.id = payment.getId();
-        this.record = payment.getRecord();
+        //this.record = new RecordDTO(payment.getRecord());
         this.date = payment.getDate();
         this.userName = payment.getUser().getUsername();
         this.value = payment.getValue();
@@ -50,19 +49,19 @@ public class PaymentDTO {
         this.userName = name;
     }
 
-    public Record getRecord() {
+    public RecordDTO getRecord() {
         return record;
     }
 
-    public void setRecord(Record record) {
+    public void setRecord(RecordDTO record) {
         this.record = record;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

@@ -5,8 +5,6 @@ import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.User;
 import br.com.minguini.storerecord.form.PaymentForm;
 
-import java.time.LocalDateTime;
-
 public class PaymentFactory {
 
     public static Payment getPayment(PaymentForm paymentForm, Long userId){
@@ -21,8 +19,10 @@ public class PaymentFactory {
 
         payment.setUser(user);
         payment.setRecord(record);
-        payment.setDate(LocalDateTime.now());
+        payment.setDate(paymentForm.getDate());
         payment.setCancelled(Boolean.FALSE);
+        payment.setInterest(paymentForm.getInterest());
+        payment.setValue(paymentForm.getValue());
         payment.setTotal(paymentForm.getInterest() + paymentForm.getValue());
 
         return payment;

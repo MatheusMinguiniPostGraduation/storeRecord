@@ -2,21 +2,21 @@ package br.com.minguini.storerecord.form;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.time.LocalDateTime;
+import javax.validation.constraints.PositiveOrZero;
+import java.util.Date;
 
 public class PaymentForm {
 
     @NotNull
     private Long recordId;
 
-    @Positive
+    @PositiveOrZero
     private Double interest;
 
     @Positive
     private Double value;
 
-    private LocalDateTime time;
-
+    private Date date;
 
     public Long getRecordId() {
         return recordId;
@@ -42,12 +42,11 @@ public class PaymentForm {
         this.value = value;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
-
 }
