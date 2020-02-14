@@ -22,7 +22,7 @@ public class Sale {
 
     private Double total;
 
-    @OneToMany(cascade = {CascadeType.PERSIST})
+    @OneToMany(targetEntity = Product.class, cascade = {CascadeType.PERSIST})
     private List<Product> products;
 
     public Long getId() { return id; }

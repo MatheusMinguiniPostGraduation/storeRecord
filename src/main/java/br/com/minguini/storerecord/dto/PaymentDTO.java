@@ -24,7 +24,7 @@ public class PaymentDTO {
 
     public PaymentDTO(Payment payment){
         this.id = payment.getId();
-        //this.record = new RecordDTO(payment.getRecord());
+        this.record = new RecordDTO(payment.getRecord());
         this.date = payment.getDate();
         this.userName = payment.getUser().getUsername();
         this.value = payment.getValue();

@@ -21,17 +21,19 @@ public class PaymentService {
 
     public Payment save(Payment payment) throws PaymentGreaterThanRecordTotalValueException {
 
-        Record record = recordRepository.getOne(payment.getRecord().getId());
+        Record record = recordRepository.findById(payment.getRecord().getId()).get();
 
         //Updating the record value, adding up what was sold
         if(record != null) {
-
             if (payment.getTotal() > record.getTotal()){
                 throw new PaymentGreaterThanRecordTotalValueException(record);
             }
 
             Double value = record.getTotal() - payment.getTotal();
             record.setTotal(value);
+
+            //Need to set the object in order to be managed by the JPA Entity Manager
+            payment.setRecord(record);
         }
 
         return repository.save(payment);

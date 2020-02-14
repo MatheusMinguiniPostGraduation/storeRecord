@@ -26,7 +26,7 @@ public class SaleDTO {
         this.id = sale.getId();
         this.date = getSaleDate(sale.getDate());
         this.time =  getSaleTime(sale.getDate());
-        //this.record = new RecordDTO(sale.getRecord());
+        this.record = new RecordDTO(sale.getRecord());
         this.total = sale.getTotal();
     }
 
