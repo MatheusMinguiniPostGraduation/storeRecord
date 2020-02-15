@@ -2,6 +2,7 @@ package br.com.minguini.storerecord.dto;
 
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.entity.User;
+import br.com.minguini.storerecord.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,8 +25,8 @@ public class SaleDTO {
 
     public SaleDTO(Sale sale){
         this.id = sale.getId();
-        this.date = getSaleDate(sale.getDate());
-        this.time =  getSaleTime(sale.getDate());
+        this.date = LocalDateTimeUtil.getFormattedDate(sale.getDate());
+        this.time =  LocalDateTimeUtil.getFormattedTime(sale.getDate());
         this.record = new RecordDTO(sale.getRecord());
         this.total = sale.getTotal();
     }
@@ -84,23 +85,5 @@ public class SaleDTO {
 
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
-    }
-
-    private String getSaleTime(LocalDateTime date){
-        int hour = date.getHour();
-        int minute = date.getMinute();
-
-        return String.valueOf(hour).concat(":").concat(String.valueOf(minute));
-    }
-
-    private String getSaleDate(LocalDateTime date){
-        String dateStr = "d/m/y";
-
-        String day = String.valueOf(date.getDayOfMonth());
-        String month = String.valueOf(date.getMonthValue());
-        String year = String.valueOf(date.getYear());
-        dateStr = dateStr.replace("d", day).replace("m", month).replace("y", year);
-
-        return dateStr;
     }
 }

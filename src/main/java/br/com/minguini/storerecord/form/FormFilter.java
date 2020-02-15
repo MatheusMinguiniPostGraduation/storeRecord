@@ -1,6 +1,6 @@
 package br.com.minguini.storerecord.form;
 
-public class SaleFormFilter {
+public class FormFilter {
 
     String fromDate;
     String toDate;

@@ -5,7 +5,7 @@ import br.com.minguini.storerecord.dto.SaleDTO;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.factory.SaleFactory;
 import br.com.minguini.storerecord.form.SaleForm;
-import br.com.minguini.storerecord.form.SaleFormFilter;
+import br.com.minguini.storerecord.form.FormFilter;
 import br.com.minguini.storerecord.service.SaleService;
 import br.com.minguini.storerecord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class SaleController {
 
     @GetMapping
     @RequestMapping(method = RequestMethod.GET, value = "/{recordId}")
-    public List<SaleDTO> findRecords(SaleFormFilter filter, @PathVariable("recordId") Long recordId){
+    public List<SaleDTO> findSales(FormFilter filter, @PathVariable("recordId") Long recordId){
 
         List<Sale> list = service.getFilteredList(recordId, filter);
 

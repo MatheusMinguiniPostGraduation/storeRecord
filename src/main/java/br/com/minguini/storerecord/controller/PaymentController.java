@@ -2,14 +2,11 @@ package br.com.minguini.storerecord.controller;
 
 import br.com.minguini.storerecord.dto.PaymentDTO;
 import br.com.minguini.storerecord.dto.RecordDTO;
-import br.com.minguini.storerecord.dto.SaleDTO;
 import br.com.minguini.storerecord.entity.Payment;
-import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.exception.PaymentGreaterThanRecordTotalValueException;
 import br.com.minguini.storerecord.factory.PaymentFactory;
-import br.com.minguini.storerecord.factory.SaleFactory;
+import br.com.minguini.storerecord.form.FormFilter;
 import br.com.minguini.storerecord.form.PaymentForm;
-import br.com.minguini.storerecord.form.SaleForm;
 import br.com.minguini.storerecord.service.PaymentService;
 import br.com.minguini.storerecord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/payments")
@@ -50,4 +49,12 @@ public class PaymentController {
         return ResponseEntity.created(uri).body(new PaymentDTO(payment));
     }
 
+    @GetMapping
+    @RequestMapping(method = RequestMethod.GET, value = "/{recordId}")
+    public List<PaymentDTO> findPayments(FormFilter filter, @PathVariable("recordId") Long recordId){
+
+        List<Payment> list = paymentService.getFilteredList(recordId, filter);
+
+        return list.stream().map(payment -> new PaymentDTO(payment)).collect(Collectors.toList());
+    }
 }
