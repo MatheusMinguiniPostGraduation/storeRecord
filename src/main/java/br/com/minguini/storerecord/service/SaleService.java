@@ -3,13 +3,16 @@ package br.com.minguini.storerecord.service;
 
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
+import br.com.minguini.storerecord.form.SaleFormFilter;
 import br.com.minguini.storerecord.repository.RecordRepository;
 import br.com.minguini.storerecord.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class SaleService {
@@ -35,11 +38,24 @@ public class SaleService {
 
         return saleRepository.save(sale);
     }
+    public List<Sale> getFilteredList(Long recordId, SaleFormFilter filter){
 
-    public Sale getFetchRecord(Long id){
-        Optional<Sale> sale = saleRepository.findById(id);
+        LocalDateTime fromDateTime = getLocalDateTime(filter.getFromDate(), " 00:00:00");
+        LocalDateTime toDateTime = getLocalDateTime(filter.getToDate(), " 23:59:59");
 
-        return sale.get();
+        return saleRepository.getSalesFromFilter(recordId, fromDateTime, toDateTime, filter.getMinValue(), filter.getMaxValue());
+    }
 
+    private LocalDateTime getLocalDateTime(String dateString, String hour) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        if(dateString != null){
+            String dateWithHour = dateString.concat(hour);
+            LocalDateTime dateTime = LocalDateTime.parse(dateWithHour, formatter);
+            return dateTime;
+        }
+
+        return null;
     }
 }
