@@ -28,11 +28,11 @@ public class PaymentService {
 
         //Updating the record value, adding up what was sold
         if(record != null) {
-            if (payment.getTotal() > record.getTotal()){
-                throw new PaymentGreaterThanRecordTotalValueException(record);
+            if (payment.getValue() > record.getTotal()){
+                throw new PaymentGreaterThanRecordTotalValueException(payment);
             }
 
-            Double value = record.getTotal() - payment.getTotal();
+            Double value = record.getTotal() - payment.getValue();
             record.setTotal(value);
 
             //Need to set the object in order to be managed by the JPA Entity Manager

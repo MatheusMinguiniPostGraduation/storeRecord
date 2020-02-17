@@ -1,17 +1,16 @@
 package br.com.minguini.storerecord.dto;
 
 import br.com.minguini.storerecord.entity.Sale;
-import br.com.minguini.storerecord.entity.User;
 import br.com.minguini.storerecord.util.LocalDateTimeUtil;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SaleDTO {
 
     private Long id;
 
-    private User user;
+    private String userName;
 
     private RecordDTO record;
 
@@ -26,6 +25,12 @@ public class SaleDTO {
     public SaleDTO(Sale sale){
         this.id = sale.getId();
         this.date = LocalDateTimeUtil.getFormattedDate(sale.getDate());
+
+        if(sale.getProducts() != null){
+            this.products = sale.getProducts().stream().map(product -> new ProductDTO(product)).collect(Collectors.toList());
+        }
+
+        this.userName = sale.getUser().getUsername();
         this.time =  LocalDateTimeUtil.getFormattedTime(sale.getDate());
         this.record = new RecordDTO(sale.getRecord());
         this.total = sale.getTotal();
@@ -39,12 +44,12 @@ public class SaleDTO {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public RecordDTO getRecord() {

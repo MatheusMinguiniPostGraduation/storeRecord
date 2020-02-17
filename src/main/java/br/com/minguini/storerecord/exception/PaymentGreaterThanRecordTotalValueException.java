@@ -1,21 +1,21 @@
 package br.com.minguini.storerecord.exception;
 
-import br.com.minguini.storerecord.entity.Record;
+import br.com.minguini.storerecord.entity.Payment;
 
 public class PaymentGreaterThanRecordTotalValueException extends Exception {
 
-    private Record record;
+    private Payment payment;
 
-    public PaymentGreaterThanRecordTotalValueException(Record record) {
-        this.record = record;
+    public PaymentGreaterThanRecordTotalValueException(Payment payment) {
+        this.payment = payment;
     }
 
-    public Record getRecord() {
-        return record;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setRecord(Record record) {
-        this.record = record;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
 }

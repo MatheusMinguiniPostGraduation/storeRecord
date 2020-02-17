@@ -16,13 +16,17 @@ public class PaymentDTO {
 
     private String date;
 
-    private Double interest;
-
     private Double value;
 
     private Double total;
 
+    private String paymentMethod;
+
     private Boolean cancelled;
+
+    public PaymentDTO(){
+
+    }
 
     public PaymentDTO(Payment payment){
         this.id = payment.getId();
@@ -33,8 +37,7 @@ public class PaymentDTO {
 
         this.userName = payment.getUser().getUsername();
         this.value = payment.getValue();
-        this.interest = payment.getInterest();
-        this.total = payment.getTotal();
+        this.paymentMethod = payment.getPaymentMethod();
         this.cancelled = payment.isCancelled();
     }
 
@@ -78,14 +81,6 @@ public class PaymentDTO {
         this.date = date;
     }
 
-    public Double getInterest() {
-        return interest;
-    }
-
-    public void setInterest(Double interest) {
-        this.interest = interest;
-    }
-
     public Double getValue() {
         return value;
     }
@@ -100,6 +95,14 @@ public class PaymentDTO {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public Boolean isCancelled() {

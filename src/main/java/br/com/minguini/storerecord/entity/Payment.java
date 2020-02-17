@@ -16,13 +16,11 @@ public class Payment {
     @ManyToOne
     private User user;
 
-    private Double interest;
-
     private Double value;
 
-    private Double total;
-
     private Date date;
+
+    private String paymentMethod;
 
     private Boolean cancelled;
 
@@ -50,14 +48,6 @@ public class Payment {
         this.user = user;
     }
 
-    public Double getInterest() {
-        return interest;
-    }
-
-    public void setInterest(Double interest) {
-        this.interest = interest;
-    }
-
     public Double getValue() {
         return value;
     }
@@ -66,20 +56,20 @@ public class Payment {
         this.value = value;
     }
 
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public Boolean isCancelled() {

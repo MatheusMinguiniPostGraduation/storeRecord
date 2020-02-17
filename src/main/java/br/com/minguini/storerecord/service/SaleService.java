@@ -28,7 +28,7 @@ public class SaleService {
     // Test if given a record ID that does not exist, the Sale will still be persisted. It cant be persisted with a recordId that is not yet saved
     public Sale save(Sale sale){
 
-        Record record = recordRepository.findById(sale.getRecord().getId()).get();
+        Record record = recordRepository.getOne(sale.getRecord().getId());
 
         //Updating the record value, adding up what was sold
         if(record != null){
@@ -47,4 +47,7 @@ public class SaleService {
         return saleRepository.getSalesFromFilter(recordId, fromDateTime, toDateTime, filter.getMinValue(), filter.getMaxValue());
     }
 
+    public Sale getSaleById(Long id) {
+        return saleRepository.getFetchedSaleElements(id);
+    }
 }

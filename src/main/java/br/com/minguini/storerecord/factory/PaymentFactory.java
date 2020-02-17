@@ -21,9 +21,8 @@ public class PaymentFactory {
         payment.setRecord(record);
         payment.setDate(paymentForm.getDate());
         payment.setCancelled(Boolean.FALSE);
-        payment.setInterest(paymentForm.getInterest());
         payment.setValue(paymentForm.getValue());
-        payment.setTotal(paymentForm.getInterest() + paymentForm.getValue());
+        payment.setPaymentMethod(paymentForm.getPaymentMethod());
 
         return payment;
     }

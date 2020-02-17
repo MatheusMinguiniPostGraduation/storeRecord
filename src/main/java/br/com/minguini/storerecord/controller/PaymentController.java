@@ -40,17 +40,15 @@ public class PaymentController {
         try {
             paymentService.save(payment);
 
-
+            URI uri = uriBuilder.path("/payments/{id}").buildAndExpand(payment.getId()).toUri();
+            return ResponseEntity.created(uri).body(new PaymentDTO(payment));
         } catch (PaymentGreaterThanRecordTotalValueException exception) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RecordDTO(exception.getRecord()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PaymentDTO());
         }
-
-        URI uri = uriBuilder.path("/payments/{id}").buildAndExpand(payment.getId()).toUri();
-        return ResponseEntity.created(uri).body(new PaymentDTO(payment));
     }
 
     @GetMapping
-    @RequestMapping(method = RequestMethod.GET, value = "/{recordId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/record/{recordId}")
     public List<PaymentDTO> findPayments(FormFilter filter, @PathVariable("recordId") Long recordId){
 
         List<Payment> list = paymentService.getFilteredList(recordId, filter);

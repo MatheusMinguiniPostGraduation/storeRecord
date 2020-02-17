@@ -43,7 +43,15 @@ public class SaleController {
     }
 
     @GetMapping
-    @RequestMapping(method = RequestMethod.GET, value = "/{recordId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{saleId}")
+    public SaleDTO findSaleById(@PathVariable("saleId") Long saleId){
+
+        Sale sale = service.getSaleById(saleId);
+
+        return new SaleDTO(sale);
+    }
+
+    @GetMapping("/record/{recordId}")
     public List<SaleDTO> findSales(FormFilter filter, @PathVariable("recordId") Long recordId){
 
         List<Sale> list = service.getFilteredList(recordId, filter);

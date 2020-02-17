@@ -2,7 +2,6 @@ package br.com.minguini.storerecord.form;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
 import java.util.Date;
 
 public class PaymentForm {
@@ -10,11 +9,10 @@ public class PaymentForm {
     @NotNull
     private Long recordId;
 
-    @PositiveOrZero
-    private Double interest;
-
     @Positive
     private Double value;
+
+    private String paymentMethod;
 
     private Date date;
 
@@ -24,14 +22,6 @@ public class PaymentForm {
 
     public void setRecordId(Long recordId) {
         this.recordId = recordId;
-    }
-
-    public Double getInterest() {
-        return interest;
-    }
-
-    public void setInterest(Double interest) {
-        this.interest = interest;
     }
 
     public Double getValue() {
@@ -48,5 +38,13 @@ public class PaymentForm {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
