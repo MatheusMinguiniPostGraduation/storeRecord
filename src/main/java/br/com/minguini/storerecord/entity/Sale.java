@@ -9,20 +9,23 @@ import java.util.List;
 public class Sale {
 
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "record_id")
     private Record record;
 
     private LocalDateTime date;
 
     private Double total;
 
-    @OneToMany(targetEntity = Product.class, cascade = {CascadeType.PERSIST})
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name ="sale_id")
     private List<Product> products;
 
     public Long getId() { return id; }
@@ -62,6 +65,6 @@ public class Sale {
     public Double getTotal() { return total; }
 
     public void setTotal() {
-        this.total = this.products.stream().mapToDouble(Product::getTotal_value).sum();
+        this.total = this.products.stream().mapToDouble(Product::getTotalValue).sum();
     }
 }

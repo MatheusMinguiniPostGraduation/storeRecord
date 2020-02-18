@@ -1,7 +1,9 @@
 package br.com.minguini.storerecord.controller;
 
 
+import br.com.minguini.storerecord.dto.RecordDTO;
 import br.com.minguini.storerecord.dto.SaleDTO;
+import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.factory.SaleFactory;
 import br.com.minguini.storerecord.form.SaleForm;
@@ -57,6 +59,13 @@ public class SaleController {
         List<Sale> list = service.getFilteredList(recordId, filter);
 
         return list.stream().map(sale -> new SaleDTO(sale)).collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{saleId}")
+    public ResponseEntity<RecordDTO> delete(@PathVariable("saleId") Long saleId){
+        Record record = service.delete(saleId);
+
+        return ResponseEntity.ok(new RecordDTO(record));
     }
 
 

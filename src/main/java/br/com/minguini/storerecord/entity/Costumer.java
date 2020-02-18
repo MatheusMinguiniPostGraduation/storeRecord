@@ -1,19 +1,20 @@
 package br.com.minguini.storerecord.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Costumer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "extra_information")
     private String extraInformation;
 
     public Long getId() {

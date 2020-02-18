@@ -17,8 +17,8 @@ public class ProductDTO {
     public ProductDTO(Product product){
         this.id = product.getId();
         this.description = product.getDescription();
-        this.unit_value = product.getUnit_value();
-        this.total_value = product.getTotal_value();
+        this.unit_value = product.getUnitValue();
+        this.total_value = product.getTotalValue();
         this.amount = product.getAmount();
     }
     public String getDescription() {

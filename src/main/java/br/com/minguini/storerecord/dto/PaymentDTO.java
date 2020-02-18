@@ -38,7 +38,6 @@ public class PaymentDTO {
         this.userName = payment.getUser().getUsername();
         this.value = payment.getValue();
         this.paymentMethod = payment.getPaymentMethod();
-        this.cancelled = payment.isCancelled();
     }
 
     public Long getId() {

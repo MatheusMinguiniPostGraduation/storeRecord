@@ -7,22 +7,23 @@ import java.util.Date;
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "record_id")
     private Record record;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     private Double value;
 
     private Date date;
 
+    @Column(name = "payment_method")
     private String paymentMethod;
-
-    private Boolean cancelled;
 
     public Long getId() {
         return id;
@@ -70,13 +71,5 @@ public class Payment {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public Boolean isCancelled() {
-        return cancelled;
-    }
-
-    public void setCancelled(Boolean cancelled) {
-        this.cancelled = cancelled;
     }
 }

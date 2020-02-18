@@ -6,17 +6,20 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne (cascade = {CascadeType.PERSIST})
+    @ManyToOne
+    @JoinColumn(name = "sale_id")
     private Sale sale;
 
     private String description;
 
-    private Double unit_value;
+    @Column(name = "unit_value")
+    private Double unitValue;
 
-    private Double total_value;
+    @Column(name = "total_value")
+    private Double totalValue;
 
     private Integer amount;
 
@@ -36,6 +39,22 @@ public class Product {
         this.description = description;
     }
 
+    public Double getUnitValue() {
+        return unitValue;
+    }
+
+    public void setUnitValue(Double unitValue) {
+        this.unitValue = unitValue;
+    }
+
+    public Double getTotalValue() {
+        return totalValue;
+    }
+
+    public void setTotalValue(Double totalValue) {
+        this.totalValue = totalValue;
+    }
+
     public Sale getSale() {
         return sale;
     }
@@ -44,21 +63,6 @@ public class Product {
         this.sale = sale;
     }
 
-    public Double getUnit_value() {
-        return unit_value;
-    }
-
-    public void setUnit_value(Double unit_value) {
-        this.unit_value = unit_value;
-    }
-
-    public Double getTotal_value() {
-        return total_value;
-    }
-
-    public void setTotal_value(Double total_value) {
-        this.total_value = total_value;
-    }
 
     public Integer getAmount() {
         return amount;

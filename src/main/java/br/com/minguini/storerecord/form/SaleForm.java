@@ -46,8 +46,8 @@ public class SaleForm {
         this.products.forEach((productForm) -> {
             Product product = new Product();
             product.setDescription(productForm.getDescription());
-            product.setUnit_value(productForm.getUnit_value());
-            product.setTotal_value(productForm.getTotal_value());
+            product.setUnitValue(productForm.getUnit_value());
+            product.setTotalValue(productForm.getTotal_value());
             product.setAmount(productForm.getAmount());
 
             productEntities.add(product);

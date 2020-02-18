@@ -11,7 +11,7 @@ public class RecordFactory {
         Record record = new Record();
         record.setCostumer(costumer);
         record.setTotal(0.0);
-        record.setCreation_date(LocalDateTime.now());
+        record.setCreationDate(LocalDateTime.now());
 
         return record;
     }

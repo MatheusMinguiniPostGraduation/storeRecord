@@ -20,7 +20,6 @@ public class PaymentFactory {
         payment.setUser(user);
         payment.setRecord(record);
         payment.setDate(paymentForm.getDate());
-        payment.setCancelled(Boolean.FALSE);
         payment.setValue(paymentForm.getValue());
         payment.setPaymentMethod(paymentForm.getPaymentMethod());
 

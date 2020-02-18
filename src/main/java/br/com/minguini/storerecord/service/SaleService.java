@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SaleService {
@@ -39,6 +39,7 @@ public class SaleService {
 
         return saleRepository.save(sale);
     }
+
     public List<Sale> getFilteredList(Long recordId, FormFilter filter){
 
         LocalDateTime fromDateTime = LocalDateTimeUtil.getLocalDateTimeToLookUp(filter.getFromDate(), " 00:00:00");
@@ -49,5 +50,20 @@ public class SaleService {
 
     public Sale getSaleById(Long id) {
         return saleRepository.getFetchedSaleElements(id);
+    }
+
+    public Record delete(Long id){
+        Optional<Sale> sale = this.saleRepository.findById(id);
+
+        if(!sale.isPresent()){
+           //throw RecordNotFoundException here
+        }
+
+        Record record = sale.get().getRecord();
+        record.setTotal(record.getTotal() - sale.get().getTotal());
+
+        this.saleRepository.deleteById(id);
+
+        return record;
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String login;
@@ -21,6 +21,10 @@ public class User implements UserDetails {
     private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_profile",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "profile_id")
+    )
     private List<Profile> profiles = new ArrayList<Profile>();
 
     public Long getId() {

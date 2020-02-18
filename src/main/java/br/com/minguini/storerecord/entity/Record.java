@@ -9,18 +9,24 @@ import java.util.List;
 public class Record {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
+    @JoinColumn(name = "costumer_id")
     private Costumer costumer;
+
+    private Double interest;
 
     private Double total;
 
-    private LocalDateTime creation_date;
+    private LocalDateTime creationDate;
 
-    @OneToMany
+    @OneToMany(mappedBy="record",cascade=CascadeType.ALL)
     private List<Payment> payments;
+
+    @OneToMany(mappedBy="record", cascade=CascadeType.ALL)
+    private List<Sale> sales;
 
     public Long getId() {
         return id;
@@ -38,6 +44,14 @@ public class Record {
         this.costumer = costumer;
     }
 
+    public Double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(Double interest) {
+        this.interest = interest;
+    }
+
     public Double getTotal() {
         return total;
     }
@@ -46,12 +60,12 @@ public class Record {
         this.total = total;
     }
 
-    public LocalDateTime getCreation_date() {
-        return creation_date;
+    public LocalDateTime getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(LocalDateTime creation_date) {
-        this.creation_date = creation_date;
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
     }
 
     public List<Payment> getPayments() {
@@ -62,4 +76,11 @@ public class Record {
         this.payments = payments;
     }
 
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
+    }
 }
