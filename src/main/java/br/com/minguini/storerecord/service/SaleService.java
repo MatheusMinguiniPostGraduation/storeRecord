@@ -3,6 +3,7 @@ package br.com.minguini.storerecord.service;
 
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
+import br.com.minguini.storerecord.entity.User;
 import br.com.minguini.storerecord.form.FormFilter;
 import br.com.minguini.storerecord.repository.RecordRepository;
 import br.com.minguini.storerecord.repository.SaleRepository;
@@ -23,6 +24,9 @@ public class SaleService {
 
     @Autowired
     RecordRepository recordRepository;
+
+    @Autowired
+    CreditService creditService;
 
     @Transactional
     // Test if given a record ID that does not exist, the Sale will still be persisted. It cant be persisted with a recordId that is not yet saved
@@ -52,17 +56,30 @@ public class SaleService {
         return saleRepository.getFetchedSaleElements(id);
     }
 
-    public Record delete(Long id){
-        Optional<Sale> sale = this.saleRepository.findById(id);
+    public Record deleteLogically(Long recordId, Long userId){
+        Optional<Sale> sale = this.saleRepository.findById(recordId);
 
         if(!sale.isPresent()){
            //throw RecordNotFoundException here
         }
 
-        Record record = sale.get().getRecord();
-        record.setTotal(record.getTotal() - sale.get().getTotal());
+        //Getting the user who deleted the sale
+        User userRemoval = new User();
+        userRemoval.setId(userId);
 
-        this.saleRepository.deleteById(id);
+        //Deleting Sale logically
+        sale.get().setRemoved(Boolean.TRUE);
+        sale.get().setRemovalDate(LocalDateTime.now());
+        sale.get().setRemovalUser(userRemoval);
+
+        //Updating Record value
+        Record record = sale.get().getRecord();
+        Double newRecordTotalValue = record.getTotal() - sale.get().getTotal();
+        record.setTotal(newRecordTotalValue);
+
+        if(newRecordTotalValue < 0){
+            creditService.save(record, sale.get(), newRecordTotalValue);
+        }
 
         return record;
     }

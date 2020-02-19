@@ -28,6 +28,15 @@ public class Sale {
     @JoinColumn(name ="sale_id")
     private List<Product> products;
 
+    private boolean removed;
+
+    @Column(name = "removal_date")
+    private LocalDateTime removalDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_removal_id")
+    private User removalUser;
+
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }
@@ -67,4 +76,24 @@ public class Sale {
     public void setTotal() {
         this.total = this.products.stream().mapToDouble(Product::getTotalValue).sum();
     }
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
+    }
+
+    public LocalDateTime getRemovalDate() {
+        return removalDate;
+    }
+
+    public void setRemovalDate(LocalDateTime removalDate) {
+        this.removalDate = removalDate;
+    }
+
+    public User getRemovalUser() { return removalUser; }
+
+    public void setRemovalUser(User removalUser) { this.removalUser = removalUser; }
 }

@@ -1,12 +1,15 @@
 package br.com.minguini.storerecord.controller;
 
 
+import br.com.minguini.storerecord.dto.CreditDTO;
 import br.com.minguini.storerecord.dto.RecordDTO;
 import br.com.minguini.storerecord.entity.Costumer;
+import br.com.minguini.storerecord.entity.Credit;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.exception.RecordAlreadyExistsException;
 import br.com.minguini.storerecord.factory.RecordFactory;
 import br.com.minguini.storerecord.form.RecordForm;
+import br.com.minguini.storerecord.service.CreditService;
 import br.com.minguini.storerecord.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/records")
@@ -27,6 +31,9 @@ public class RecordController {
 
     @Autowired
     RecordService service;
+
+    @Autowired
+    CreditService creditService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/{recordId}")
     public ResponseEntity<RecordDTO> findById(@PathVariable final long recordId){
@@ -92,5 +99,16 @@ public class RecordController {
         Record record = this.service.update(id, form);
 
         return ResponseEntity.ok(new RecordDTO(record));
+    }
+
+    @GetMapping("/{id}/credits")
+    public List<CreditDTO> getCredits(@PathVariable Long id){
+
+        List<Credit> list = creditService.findCreditsByRecordId(id);
+
+        List<CreditDTO> lista = list.stream().map(credit -> new CreditDTO(credit)).collect(Collectors.toList());
+
+        return lista;
+
     }
 }

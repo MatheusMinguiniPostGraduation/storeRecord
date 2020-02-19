@@ -25,6 +25,7 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
     Sale getFetchedSaleElements(@Param("id") Long id);
 
     @Query("SELECT s FROM Sale s WHERE s.record.id = :recordId" +
+            " AND s.removed != true" +
             " AND ( :from = null OR s.date >= :from ) " +
             " AND ( :to = null OR s.date <= :to )  " +
             " AND ( :minValue = null OR s.total >= :minValue ) " +

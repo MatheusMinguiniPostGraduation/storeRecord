@@ -20,16 +20,23 @@ public class LocalDateTimeUtil {
 
     public static String getFormattedDate(LocalDateTime date){
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if(date != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        return date.format(formatter);
+            return date.format(formatter);
+        }
+
+        return null;
     }
 
     public static String getFormattedTime(LocalDateTime date){
+        if(date != null){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            return date.format(formatter);
+        }
 
-        return date.format(formatter);
+        return null;
     }
 
 

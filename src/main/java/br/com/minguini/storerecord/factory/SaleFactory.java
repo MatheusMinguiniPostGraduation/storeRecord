@@ -27,5 +27,4 @@ public class SaleFactory {
 
         return sale;
     }
-
 }

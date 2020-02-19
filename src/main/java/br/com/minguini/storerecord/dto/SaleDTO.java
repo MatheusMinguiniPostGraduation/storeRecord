@@ -22,6 +22,14 @@ public class SaleDTO {
 
     private List<ProductDTO> products;
 
+    private boolean removed;
+
+    private String removalDate;
+
+    private String removalHour;
+
+    private String userNameRemoval;
+
     public SaleDTO(Sale sale){
         this.id = sale.getId();
         this.date = LocalDateTimeUtil.getFormattedDate(sale.getDate());
@@ -34,6 +42,10 @@ public class SaleDTO {
         this.time =  LocalDateTimeUtil.getFormattedTime(sale.getDate());
         this.record = new RecordDTO(sale.getRecord());
         this.total = sale.getTotal();
+
+        if(sale.isRemoved()){
+            setRemovedFieldsSaleDTO(this, sale);
+        }
     }
 
     public Long getId() {
@@ -90,5 +102,48 @@ public class SaleDTO {
 
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
+    }
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(boolean removed) {
+        this.removed = removed;
+    }
+
+    public String getRemovalDate() {
+        return removalDate;
+    }
+
+    public void setRemovalDate(String removalDate) {
+        this.removalDate = removalDate;
+    }
+
+    public String getRemovalHour() {
+        return removalHour;
+    }
+
+    public void setRemovalHour(String removalHour) {
+        this.removalHour = removalHour;
+    }
+
+    public String getUserNameRemoval() {
+        return userNameRemoval;
+    }
+
+    public void setUserNameRemoval(String userNameRemoval) {
+        this.userNameRemoval = userNameRemoval;
+    }
+
+    private void setRemovedFieldsSaleDTO(SaleDTO dto, Sale sale){
+        dto.removalDate = LocalDateTimeUtil.getFormattedDate(sale.getRemovalDate());
+        dto.removalHour = LocalDateTimeUtil.getFormattedTime(sale.getRemovalDate());
+        dto.removed = sale.isRemoved();
+
+        if(sale.getRemovalUser() != null){
+            dto.userNameRemoval = sale.getRemovalUser().getUsername();
+        }
+
     }
 }
