@@ -3,6 +3,7 @@ package br.com.minguini.storerecord.controller;
 import br.com.minguini.storerecord.dto.PaymentDTO;
 import br.com.minguini.storerecord.dto.RecordDTO;
 import br.com.minguini.storerecord.entity.Payment;
+import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.exception.PaymentGreaterThanRecordTotalValueException;
 import br.com.minguini.storerecord.factory.PaymentFactory;
 import br.com.minguini.storerecord.form.FormFilter;
@@ -12,6 +13,7 @@ import br.com.minguini.storerecord.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -54,5 +56,12 @@ public class PaymentController {
         List<Payment> list = paymentService.getFilteredList(recordId, filter);
 
         return list.stream().map(payment -> new PaymentDTO(payment)).collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{paymentId}")
+    @Transactional
+    public ResponseEntity<RecordDTO> delete(@PathVariable("paymentId") Long paymentId){
+        Record record = paymentService.delete(paymentId);
+        return ResponseEntity.ok(new RecordDTO(record));
     }
 }

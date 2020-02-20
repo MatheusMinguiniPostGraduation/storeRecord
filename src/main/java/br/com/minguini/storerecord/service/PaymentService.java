@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaymentService {
@@ -57,4 +58,21 @@ public class PaymentService {
         return repository.getPaymentsFromFilter(recordId, fromDateTime, toDateTime, filter.getMinValue(), filter.getMaxValue());
     }
 
+    public Record delete(Long paymentId) {
+
+        Optional<Payment> payment = this.repository.findById(paymentId);
+
+//        if(!sale.isPresent()){
+//            throw new PaymentNotFoundException();
+//        }
+
+        //Adding up the payment value in the record since it is being deleting from database
+        Record record = payment.get().getRecord();
+        Double totalUpdated = record.getTotal() + payment.get().getValue();
+        record.setTotal(totalUpdated);
+
+        repository.deleteById(paymentId);
+
+        return record;
+    }
 }
