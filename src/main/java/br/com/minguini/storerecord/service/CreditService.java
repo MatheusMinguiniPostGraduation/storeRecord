@@ -22,7 +22,12 @@ public class CreditService {
         credit.setRecord(record);
         credit.setSale(sale);
         credit.setDate(LocalDateTime.now());
-        credit.setValue(value * -1);
+
+        if(value < 0 ){
+            value = value * -1;
+        }
+
+        credit.setValue(value);
 
         return repository.save(credit);
     }

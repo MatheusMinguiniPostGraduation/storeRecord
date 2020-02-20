@@ -21,6 +21,15 @@ public class ProductDTO {
         this.total_value = product.getTotalValue();
         this.amount = product.getAmount();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -75,11 +75,22 @@ public class SaleService {
         //Updating Record value
         Record record = sale.get().getRecord();
         Double newRecordTotalValue = record.getTotal() - sale.get().getTotal();
-        record.setTotal(newRecordTotalValue);
 
         if(newRecordTotalValue < 0){
-            creditService.save(record, sale.get(), newRecordTotalValue);
+
+            // If the total record is already negative, it means that the sale total is what I am being giving as credit
+            if(record.getTotal() < 0){
+                creditService.save(record, sale.get(), sale.get().getTotal());
+            }else {
+
+                // If the total record is not negative, it means that the new record total is what I am giving as credit
+                creditService.save(record, sale.get(), newRecordTotalValue);
+            }
         }
+
+
+        record.setTotal(newRecordTotalValue);
+
 
         return record;
     }
