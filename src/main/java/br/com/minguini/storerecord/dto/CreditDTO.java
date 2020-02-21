@@ -1,7 +1,6 @@
 package br.com.minguini.storerecord.dto;
 
 import br.com.minguini.storerecord.entity.Credit;
-import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.util.LocalDateTimeUtil;
 
 public class CreditDTO {
@@ -14,11 +13,14 @@ public class CreditDTO {
 
     private String hour;
 
+    private String type;
+
     public CreditDTO(Credit credit) {
         this.sale = new SaleDTO(credit.getSale());
         this.value = credit.getValue();
         this.date = LocalDateTimeUtil.getFormattedDate(credit.getDate());
         this.hour = LocalDateTimeUtil.getFormattedTime(credit.getDate());
+        this.type = credit.getType();
     }
 
     public SaleDTO getSale() {
@@ -51,5 +53,13 @@ public class CreditDTO {
 
     public void setHour(String hour) {
         this.hour = hour;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

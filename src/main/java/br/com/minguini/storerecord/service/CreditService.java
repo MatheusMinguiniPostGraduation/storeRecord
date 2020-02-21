@@ -17,11 +17,12 @@ public class CreditService {
     @Autowired
     CreditRepository repository;
 
-    public Credit save(Record record, Sale sale, Double value){
+    public Credit save(Record record, Sale sale, Double value, String type){
         Credit credit = new Credit();
         credit.setRecord(record);
         credit.setSale(sale);
         credit.setDate(LocalDateTime.now());
+        credit.setType(type);
 
         if(value < 0 ){
             value = value * -1;

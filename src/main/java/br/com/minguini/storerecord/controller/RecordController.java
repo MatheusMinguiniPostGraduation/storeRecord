@@ -106,9 +106,6 @@ public class RecordController {
 
         List<Credit> list = creditService.findCreditsByRecordId(id);
 
-        List<CreditDTO> lista = list.stream().map(credit -> new CreditDTO(credit)).collect(Collectors.toList());
-
-        return lista;
-
+        return list.stream().map(credit -> new CreditDTO(credit)).collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ package br.com.minguini.storerecord.service;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.entity.User;
+import br.com.minguini.storerecord.enums.CreditEnum;
 import br.com.minguini.storerecord.form.FormFilter;
 import br.com.minguini.storerecord.repository.RecordRepository;
 import br.com.minguini.storerecord.repository.SaleRepository;
@@ -34,6 +35,10 @@ public class SaleService {
 
         Record record = recordRepository.getOne(sale.getRecord().getId());
 
+        if(record.getTotal() < 0){
+            persistCreditUsage(record, sale);
+        }
+
         //Updating the record value, adding up what was sold
         if(record != null){
             Double value = record.getTotal() + sale.getTotal();
@@ -42,6 +47,22 @@ public class SaleService {
         }
 
         return saleRepository.save(sale);
+    }
+
+    private void persistCreditUsage(Record record, Sale sale){
+        Double totalCredit = record.getTotal() * -1;
+
+        Double totalCreditUsage = 0.0;
+
+        if( (totalCredit - sale.getTotal())  < 0){
+            //Means that the credit value is less than the sold value
+            totalCreditUsage = record.getTotal();
+        }else{
+             // Means that the credit card will not be used completely
+            totalCreditUsage = sale.getTotal();
+        }
+
+        creditService.save(record, sale, totalCreditUsage, CreditEnum.USED.name());
     }
 
     public List<Sale> getFilteredList(Long recordId, FormFilter filter){
@@ -80,11 +101,11 @@ public class SaleService {
 
             // If the total record is already negative, it means that the sale total is what I am being giving as credit
             if(record.getTotal() < 0){
-                creditService.save(record, sale.get(), sale.get().getTotal());
+                creditService.save(record, sale.get(), sale.get().getTotal(), CreditEnum.GIVEN.name());
             }else {
 
                 // If the total record is not negative, it means that the new record total is what I am giving as credit
-                creditService.save(record, sale.get(), newRecordTotalValue);
+                creditService.save(record, sale.get(), newRecordTotalValue, CreditEnum.GIVEN.name());
             }
         }
 
