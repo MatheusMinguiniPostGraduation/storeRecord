@@ -14,21 +14,24 @@ public class ProductDTO {
 
     private Integer amount;
 
+    private Boolean removed;
+
     public ProductDTO(Product product){
         this.id = product.getId();
         this.description = product.getDescription();
         this.unit_value = product.getUnitValue();
         this.total_value = product.getTotalValue();
         this.amount = product.getAmount();
+        this.removed = product.getRemoved();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getDescription() {
         return description;
@@ -60,5 +63,13 @@ public class ProductDTO {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
     }
 }

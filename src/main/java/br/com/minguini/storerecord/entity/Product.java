@@ -23,6 +23,8 @@ public class Product {
 
     private Integer amount;
 
+    private Boolean removed;
+
     public Long getId() {
         return id;
     }
@@ -63,12 +65,19 @@ public class Product {
         this.sale = sale;
     }
 
-
     public Integer getAmount() {
         return amount;
     }
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
     }
 }

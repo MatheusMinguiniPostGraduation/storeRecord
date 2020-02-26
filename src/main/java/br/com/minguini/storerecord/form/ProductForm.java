@@ -23,6 +23,8 @@ public class ProductForm {
     @Positive
     private Integer amount;
 
+    private Boolean removed;
+
     public Long getId() {
         return id;
     }
@@ -62,4 +64,8 @@ public class ProductForm {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
+
+    public Boolean isRemoved() { return removed; }
+
+    public void setRemoved(Boolean removed) { this.removed = removed; }
 }
