@@ -1,5 +1,6 @@
 package br.com.minguini.storerecord.dto;
 
+import br.com.minguini.storerecord.entity.Product;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.util.LocalDateTimeUtil;
 
@@ -22,6 +23,8 @@ public class SaleDTO {
 
     private List<ProductDTO> products;
 
+    private List<ProductDTO> returnedProducts;
+
     private boolean removed;
 
     private String removalDate;
@@ -35,7 +38,8 @@ public class SaleDTO {
         this.date = LocalDateTimeUtil.getFormattedDate(sale.getDate());
 
         if(sale.getProducts() != null){
-            this.products = sale.getProducts().stream().map(product -> new ProductDTO(product)).collect(Collectors.toList());
+            this.products = getProductList(sale.getProducts(), Boolean.FALSE);
+            this.returnedProducts = getProductList(sale.getProducts(), Boolean.TRUE);
         }
 
         this.userName = sale.getUser().getUsername();
@@ -46,6 +50,14 @@ public class SaleDTO {
         if(sale.isRemoved()){
             setRemovedFieldsSaleDTO(this, sale);
         }
+    }
+
+    private List<ProductDTO> getProductList(List<Product> products, Boolean returned){
+         return products
+                 .stream()
+                 .filter(product -> product.getRemoved() == returned)
+                 .map(ProductDTO::new)
+                 .collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -102,6 +114,14 @@ public class SaleDTO {
 
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
+    }
+
+    public List<ProductDTO> getReturnedProducts() {
+        return returnedProducts;
+    }
+
+    public void setReturnedProducts(List<ProductDTO> returnedProducts) {
+        this.returnedProducts = returnedProducts;
     }
 
     public boolean isRemoved() {

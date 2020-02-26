@@ -1,11 +1,13 @@
 package br.com.minguini.storerecord.service;
 
 
+import br.com.minguini.storerecord.entity.Costumer;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.entity.User;
 import br.com.minguini.storerecord.enums.CreditEnum;
 import br.com.minguini.storerecord.form.FormFilter;
+import br.com.minguini.storerecord.form.SaleForm;
 import br.com.minguini.storerecord.repository.RecordRepository;
 import br.com.minguini.storerecord.repository.SaleRepository;
 import br.com.minguini.storerecord.util.LocalDateTimeUtil;
@@ -47,6 +49,17 @@ public class SaleService {
         }
 
         return saleRepository.save(sale);
+    }
+
+    public Sale update(Long id, SaleForm form){
+        Sale sale = saleRepository.getOne(id);
+
+        sale.getProducts().clear();
+        saleRepository.flush();
+
+        sale.setProducts(form.getProductEntities());
+
+        return sale;
     }
 
     private void persistCreditUsage(Record record, Sale sale){

@@ -6,6 +6,7 @@ import br.com.minguini.storerecord.dto.SaleDTO;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.entity.Sale;
 import br.com.minguini.storerecord.factory.SaleFactory;
+import br.com.minguini.storerecord.form.RecordForm;
 import br.com.minguini.storerecord.form.SaleForm;
 import br.com.minguini.storerecord.form.FormFilter;
 import br.com.minguini.storerecord.service.SaleService;
@@ -60,6 +61,19 @@ public class SaleController {
         List<Sale> list = service.getFilteredList(recordId, filter);
 
         return list.stream().map(sale -> new SaleDTO(sale)).collect(Collectors.toList());
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<RecordDTO> update(@PathVariable Long id, @RequestBody @Valid SaleForm form) {
+
+        if(id == null){
+            return ResponseEntity.badRequest().build();
+        }
+
+        Sale sale = this.service.update(id, form);
+
+        return ResponseEntity.ok(new RecordDTO(sale.getRecord()));
     }
 
     @DeleteMapping("/{saleId}")

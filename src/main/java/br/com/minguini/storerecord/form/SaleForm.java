@@ -45,10 +45,17 @@ public class SaleForm {
 
         this.products.forEach((productForm) -> {
             Product product = new Product();
+            product.setId(productForm.getId());
             product.setDescription(productForm.getDescription());
             product.setUnitValue(productForm.getUnit_value());
             product.setTotalValue(productForm.getTotal_value());
             product.setAmount(productForm.getAmount());
+
+            if ((productForm.isRemoved() == null)) {
+                product.setRemoved(Boolean.FALSE);
+            } else {
+                product.setRemoved(productForm.isRemoved());
+            }
 
             productEntities.add(product);
         });
