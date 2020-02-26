@@ -49,6 +49,7 @@ public class SaleForm {
             product.setUnitValue(productForm.getUnit_value());
             product.setTotalValue(productForm.getTotal_value());
             product.setAmount(productForm.getAmount());
+            product.setRemoved(Boolean.FALSE);
 
             productEntities.add(product);
         });
