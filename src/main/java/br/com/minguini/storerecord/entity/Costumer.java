@@ -14,6 +14,8 @@ public class Costumer {
     @Column(name = "last_name")
     private String lastName;
 
+    private String cpf;
+
     @Column(name = "extra_information")
     private String extraInformation;
 
@@ -39,6 +41,14 @@ public class Costumer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getExtraInformation() {

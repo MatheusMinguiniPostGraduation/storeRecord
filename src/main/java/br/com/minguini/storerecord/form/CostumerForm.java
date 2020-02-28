@@ -17,6 +17,8 @@ public class CostumerForm {
     @NotEmpty
     private String lastName;
 
+    private String cpf;
+
     private String extraInformation;
 
     public Long getId() {
@@ -42,6 +44,10 @@ public class CostumerForm {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getCpf() { return cpf; }
+
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
     public String getExtraInformation() {
         return extraInformation;

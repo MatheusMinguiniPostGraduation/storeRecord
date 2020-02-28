@@ -56,6 +56,7 @@ public class RecordService {
         Costumer costumer = record.getCostumer();
         costumer.setName(form.getCostumer().getName());
         costumer.setLastName(form.getCostumer().getLastName());
+        costumer.setCpf(form.getCostumer().getCpf());
         costumer.setExtraInformation(form.getCostumer().getExtraInformation());
 
         record.setCostumer(costumer);

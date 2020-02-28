@@ -9,12 +9,14 @@ public class CostumerDTO {
     private Long id;
     private String name;
     private String lastName;
+    private String cpf;
     private String extraInformation;
 
     public CostumerDTO(Costumer costumer) {
         this.id = costumer.getId();
         this.name = costumer.getName();
         this.lastName = costumer.getLastName();
+        this.cpf = costumer.getCpf();
         this.extraInformation = costumer.getExtraInformation();
     }
 
@@ -38,21 +40,17 @@ public class CostumerDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public String getLastName() {
-        return lastName;
-    }
+    public String getLastName() { return lastName; }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getCpf() { return cpf; }
+
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
     public String getExtraInformation() {
         return extraInformation;

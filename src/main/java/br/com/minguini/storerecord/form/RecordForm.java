@@ -37,6 +37,7 @@ public class RecordForm {
         convertedCostumer.setId(this.costumer.getId());
         convertedCostumer.setName(this.costumer.getName());
         convertedCostumer.setLastName(this.costumer.getLastName());
+        convertedCostumer.setCpf(this.costumer.getCpf());
         convertedCostumer.setExtraInformation(this.costumer.getExtraInformation());
 
         return convertedCostumer;
