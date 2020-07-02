@@ -19,6 +19,8 @@ public class CostumerForm {
 
     private String cpf;
 
+    private String cellphone;
+
     private String extraInformation;
 
     public Long getId() {
@@ -48,6 +50,10 @@ public class CostumerForm {
     public String getCpf() { return cpf; }
 
     public void setCpf(String cpf) { this.cpf = cpf; }
+
+    public String getCellphone() { return cellphone; }
+
+    public void setCellphone(String cellphone) { this.cellphone = cellphone; }
 
     public String getExtraInformation() {
         return extraInformation;

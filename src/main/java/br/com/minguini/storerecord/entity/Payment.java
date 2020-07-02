@@ -23,7 +23,7 @@ public class Payment {
     private Date date;
 
     @Column(name = "payment_method")
-    private String paymentMethod;
+    private String method;
 
     public Long getId() {
         return id;
@@ -65,11 +65,11 @@ public class Payment {
         this.date = date;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public String getMethod() {
+        return method;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setMethod(String method) {
+        this.method = method;
     }
 }

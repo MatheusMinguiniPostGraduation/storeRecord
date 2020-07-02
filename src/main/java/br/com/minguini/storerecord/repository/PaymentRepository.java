@@ -20,5 +20,9 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     List<Payment> getPaymentsFromFilter(@Param("recordId") Long recordId, @Param("from") Date from, @Param("to")
             Date to, @Param("minValue") Double minValue, @Param("maxValue") Double maxValue);
 
+    @Query("SELECT p FROM Payment p  GROUP BY p.method")
+    List<Payment> getPaymentsByGroup();
+
+
 
 }

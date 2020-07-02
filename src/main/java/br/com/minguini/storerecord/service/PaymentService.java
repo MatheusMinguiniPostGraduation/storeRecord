@@ -75,4 +75,9 @@ public class PaymentService {
 
         return record;
     }
+
+    public List<Payment> getPaymentsByGroup(){
+
+        return repository.getPaymentsByGroup();
+    }
 }

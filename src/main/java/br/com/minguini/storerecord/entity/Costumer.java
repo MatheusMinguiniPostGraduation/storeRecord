@@ -16,6 +16,8 @@ public class Costumer {
 
     private String cpf;
 
+    private String cellphone;
+
     @Column(name = "extra_information")
     private String extraInformation;
 
@@ -50,6 +52,10 @@ public class Costumer {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public String getCellphone() { return cellphone; }
+
+    public void setCellphone(String cellphone) { this.cellphone = cellphone; }
 
     public String getExtraInformation() {
         return extraInformation;

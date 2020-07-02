@@ -64,4 +64,13 @@ public class PaymentController {
         Record record = paymentService.delete(paymentId);
         return ResponseEntity.ok(new RecordDTO(record));
     }
+
+    @GetMapping
+    @RequestMapping(method = RequestMethod.GET, value = "/types")
+    public List<PaymentDTO> findPaymentsByGroup(){
+
+        List<Payment> list = paymentService.getPaymentsByGroup();
+
+        return list.stream().map(payment -> new PaymentDTO(payment)).collect(Collectors.toList());
+    }
 }

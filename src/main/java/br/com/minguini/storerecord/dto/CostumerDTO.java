@@ -10,6 +10,7 @@ public class CostumerDTO {
     private String name;
     private String lastName;
     private String cpf;
+    private String cellphone;
     private String extraInformation;
 
     public CostumerDTO(Costumer costumer) {
@@ -17,6 +18,7 @@ public class CostumerDTO {
         this.name = costumer.getName();
         this.lastName = costumer.getLastName();
         this.cpf = costumer.getCpf();
+        this.cellphone = costumer.getCellphone();
         this.extraInformation = costumer.getExtraInformation();
     }
 
@@ -51,6 +53,10 @@ public class CostumerDTO {
     public String getCpf() { return cpf; }
 
     public void setCpf(String cpf) { this.cpf = cpf; }
+
+    public String getCellphone() { return cellphone; }
+
+    public void setCellphone(String cellphone) { this.cellphone = cellphone; }
 
     public String getExtraInformation() {
         return extraInformation;

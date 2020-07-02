@@ -38,6 +38,7 @@ public class RecordForm {
         convertedCostumer.setName(this.costumer.getName());
         convertedCostumer.setLastName(this.costumer.getLastName());
         convertedCostumer.setCpf(this.costumer.getCpf());
+        convertedCostumer.setCellphone(this.costumer.getCellphone());
         convertedCostumer.setExtraInformation(this.costumer.getExtraInformation());
 
         return convertedCostumer;
