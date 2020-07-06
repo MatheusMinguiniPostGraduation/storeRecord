@@ -1,6 +1,7 @@
 package br.com.minguini.storerecord.dto;
 
 import br.com.minguini.storerecord.entity.Payment;
+import br.com.minguini.storerecord.entity.PaymentMethod;
 import br.com.minguini.storerecord.util.LocalDateTimeUtil;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class PaymentDTO {
 
     private Double total;
 
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
     private Boolean cancelled;
 
@@ -96,11 +97,11 @@ public class PaymentDTO {
         this.total = total;
     }
 
-    public String getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 

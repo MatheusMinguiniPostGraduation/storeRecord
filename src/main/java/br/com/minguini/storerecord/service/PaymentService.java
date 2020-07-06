@@ -1,9 +1,11 @@
 package br.com.minguini.storerecord.service;
 
 import br.com.minguini.storerecord.entity.Payment;
+import br.com.minguini.storerecord.entity.PaymentMethod;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.exception.PaymentGreaterThanRecordTotalValueException;
 import br.com.minguini.storerecord.form.FormFilter;
+import br.com.minguini.storerecord.repository.PaymentMethodRepository;
 import br.com.minguini.storerecord.repository.PaymentRepository;
 import br.com.minguini.storerecord.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class PaymentService {
 
     @Autowired
     PaymentRepository repository;
+
+    @Autowired
+    PaymentMethodRepository paymentMethodRepository;
 
     @Autowired
     RecordRepository recordRepository;
@@ -79,5 +84,9 @@ public class PaymentService {
     public List<Payment> getPaymentsByGroup(){
 
         return repository.getPaymentsByGroup();
+    }
+
+    public List<PaymentMethod> getPaymentethods() {
+        return paymentMethodRepository.findAll();
     }
 }

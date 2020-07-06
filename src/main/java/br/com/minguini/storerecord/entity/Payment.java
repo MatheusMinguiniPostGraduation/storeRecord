@@ -22,8 +22,9 @@ public class Payment {
 
     private Date date;
 
-    @Column(name = "payment_method")
-    private String method;
+    @ManyToOne
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod method;
 
     public Long getId() {
         return id;
@@ -65,11 +66,11 @@ public class Payment {
         this.date = date;
     }
 
-    public String getMethod() {
+    public PaymentMethod getMethod() {
         return method;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
+    public void setMethod(PaymentMethod paymentMethod) {
+        this.method = paymentMethod;
     }
 }

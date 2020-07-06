@@ -1,5 +1,7 @@
 package br.com.minguini.storerecord.form;
 
+import br.com.minguini.storerecord.entity.PaymentMethod;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.Date;
@@ -12,7 +14,7 @@ public class PaymentForm {
     @Positive
     private Double value;
 
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
     private Date date;
 
@@ -40,11 +42,11 @@ public class PaymentForm {
         this.date = date;
     }
 
-    public String getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 }

@@ -3,6 +3,7 @@ package br.com.minguini.storerecord.controller;
 import br.com.minguini.storerecord.dto.PaymentDTO;
 import br.com.minguini.storerecord.dto.RecordDTO;
 import br.com.minguini.storerecord.entity.Payment;
+import br.com.minguini.storerecord.entity.PaymentMethod;
 import br.com.minguini.storerecord.entity.Record;
 import br.com.minguini.storerecord.exception.PaymentGreaterThanRecordTotalValueException;
 import br.com.minguini.storerecord.factory.PaymentFactory;
@@ -66,11 +67,9 @@ public class PaymentController {
     }
 
     @GetMapping
-    @RequestMapping(method = RequestMethod.GET, value = "/types")
-    public List<PaymentDTO> findPaymentsByGroup(){
-
-        List<Payment> list = paymentService.getPaymentsByGroup();
-
-        return list.stream().map(payment -> new PaymentDTO(payment)).collect(Collectors.toList());
+    @RequestMapping(method = RequestMethod.GET, value = "/methods")
+    public List<PaymentMethod> findPaymentsByGroup(){
+        List<PaymentMethod> paymentMethods =  paymentService.getPaymentethods();
+        return paymentMethods.stream().collect(Collectors.toList());
     }
 }
