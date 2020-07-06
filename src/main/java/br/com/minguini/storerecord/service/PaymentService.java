@@ -81,12 +81,9 @@ public class PaymentService {
         return record;
     }
 
-    public List<Payment> getPaymentsByGroup(){
+    public List<PaymentMethod> getPaymentsByGroup(){ return paymentMethodRepository.getPaymentsByGroup(); }
 
-        return repository.getPaymentsByGroup();
-    }
-
-    public List<PaymentMethod> getPaymentethods() {
+    public List<PaymentMethod> getPaymentMethods() {
         return paymentMethodRepository.findAll();
     }
 }

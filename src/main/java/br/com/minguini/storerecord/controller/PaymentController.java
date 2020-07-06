@@ -69,7 +69,7 @@ public class PaymentController {
     @GetMapping
     @RequestMapping(method = RequestMethod.GET, value = "/methods")
     public List<PaymentMethod> findPaymentsByGroup(){
-        List<PaymentMethod> paymentMethods =  paymentService.getPaymentethods();
+        List<PaymentMethod> paymentMethods =  paymentService.getPaymentMethods();
         return paymentMethods.stream().collect(Collectors.toList());
     }
 }
